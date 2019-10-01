@@ -2,18 +2,23 @@
 
 var appRoute = document.getElementById('app');
 //JSX JavaScript XML
-var temp = React.createElement(
+
+var title = {
+    title: 'Indecision App',
+    subTitle: 'Put your life in the hands of a computer'
+};
+var titleTemplate = React.createElement(
     'div',
     null,
     React.createElement(
         'h1',
         null,
-        'Indecision App'
+        title.title
     ),
     React.createElement(
         'p',
         null,
-        'This a paragraph'
+        title.subTitle
     ),
     React.createElement(
         'ol',
@@ -40,9 +45,8 @@ var user = {
     userName: 'Divyansh Khandelwal',
     userAge: 19,
     userLocation: 'Vellore'
-
     //Dynamic webabb
-};var newTemp = React.createElement(
+};var userTemplate = React.createElement(
     'div',
     null,
     React.createElement(
@@ -64,4 +68,5 @@ var user = {
     )
 );
 
-ReactDOM.render(newTemp, appRoute);
+ReactDOM.render(titleTemplate, appRoute);
+// ReactDOM.render(userTemplate, appRoute)
