@@ -1,0 +1,11 @@
+{
+  "name": "decision",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Divyansh",
+  "license": "MIT",
+  "dependencies": {
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1"
+  }
+}
