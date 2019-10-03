@@ -1,52 +1,49 @@
+console.log('App is up and running!')
+
 const title = {
     title: 'Indecision App',
     subTitle: 'Put your life in the hands of a computer',
-    options: ['one', 'two']
+    options: []
 }
 
-const titleTemplate = (
-    <div>
-        <h1>{title.title}</h1>
-        {title.subTitle && <p>{title.subTitle}</p>}
-        <p>{title.options.length ? 'Here are your options' : 'No options'}</p>
-        <ol>
-            <li>Item One</li>
-            <li>Item Two</li>
-        </ol>
-    </div>
-);
-let count = 0
-
-const addOne = () => {
-    count++
-    renderCounterApp()
+const onFormSubmit = (e) => {
+    e.preventDefault();
+    const option = e.target.elements.option.value
+    if(option) {
+        title.options.push(option);
+        e.target.elements.option.value = ''
+        renderTitleApp()
+        
+    }
 }
 
-const minusOne = () => {
-    count--
-    renderCounterApp()
-}
-
-const reset = () => {
-    count = 0
-    renderCounterApp()
+const removeAll = () => {
+    title.options.length = 0
+    renderTitleApp()
 }
 
 const appRoute = document.getElementById('app')
-const clickAddRoute = document.getElementById('clickAdd')
 
-ReactDOM.render(titleTemplate, appRoute)
-
-const renderCounterApp = () => {
-    const clickTemplate = (
+const renderTitleApp = () => {
+    const titleTemplate = (
         <div>
-            <h1>Count: {count}</h1>
-            <button onClick={addOne}>+1</button>
-            <button onClick={minusOne}>-1</button>
-            <button onClick={reset}>Reset</button>
+            <h1>{title.title}</h1>
+            {title.subTitle && <p>{title.subTitle}</p>}
+            <p>{title.options.length ? 'Here are your options' : 'No options'}</p>
+            <p>{title.options.length}</p>
+            <button onClick={removeAll}>Remove All</button>
+            <ol>
+                <li>Item One</li>
+                <li>Item Two</li>
+            </ol>
+            <form onSubmit={onFormSubmit}>
+                <input type = "text" name = "option"></input>
+                <button>Add options</button>
+            </form>
         </div>
-    )
-    ReactDOM.render(clickTemplate, clickAddRoute)
+    );
+    
+    ReactDOM.render(titleTemplate, appRoute)
 }
 
-renderCounterApp()
+renderTitleApp()

@@ -1,93 +1,86 @@
 'use strict';
 
+console.log('App is up and running!');
+
 var title = {
     title: 'Indecision App',
     subTitle: 'Put your life in the hands of a computer',
-    options: ['one', 'two']
+    options: []
 };
 
-var titleTemplate = React.createElement(
-    'div',
-    null,
-    React.createElement(
-        'h1',
-        null,
-        title.title
-    ),
-    title.subTitle && React.createElement(
-        'p',
-        null,
-        title.subTitle
-    ),
-    React.createElement(
-        'p',
-        null,
-        title.options.length ? 'Here are your options' : 'No options'
-    ),
-    React.createElement(
-        'ol',
-        null,
-        React.createElement(
-            'li',
-            null,
-            'Item One'
-        ),
-        React.createElement(
-            'li',
-            null,
-            'Item Two'
-        )
-    )
-);
-var count = 0;
-
-var addOne = function addOne() {
-    count++;
-    renderCounterApp();
+var onFormSubmit = function onFormSubmit(e) {
+    e.preventDefault();
+    var option = e.target.elements.option.value;
+    if (option) {
+        title.options.push(option);
+        e.target.elements.option.value = '';
+        renderTitleApp();
+    }
 };
 
-var minusOne = function minusOne() {
-    count--;
-    renderCounterApp();
-};
-
-var reset = function reset() {
-    count = 0;
-    renderCounterApp();
+var removeAll = function removeAll() {
+    title.options.length = 0;
+    renderTitleApp();
 };
 
 var appRoute = document.getElementById('app');
-var clickAddRoute = document.getElementById('clickAdd');
 
-ReactDOM.render(titleTemplate, appRoute);
-
-var renderCounterApp = function renderCounterApp() {
-    var clickTemplate = React.createElement(
+var renderTitleApp = function renderTitleApp() {
+    var titleTemplate = React.createElement(
         'div',
         null,
         React.createElement(
             'h1',
             null,
-            'Count: ',
-            count
+            title.title
+        ),
+        title.subTitle && React.createElement(
+            'p',
+            null,
+            title.subTitle
+        ),
+        React.createElement(
+            'p',
+            null,
+            title.options.length ? 'Here are your options' : 'No options'
+        ),
+        React.createElement(
+            'p',
+            null,
+            title.options.length
         ),
         React.createElement(
             'button',
-            { onClick: addOne },
-            '+1'
+            { onClick: removeAll },
+            'Remove All'
         ),
         React.createElement(
-            'button',
-            { onClick: minusOne },
-            '-1'
+            'ol',
+            null,
+            React.createElement(
+                'li',
+                null,
+                'Item One'
+            ),
+            React.createElement(
+                'li',
+                null,
+                'Item Two'
+            )
         ),
         React.createElement(
-            'button',
-            { onClick: reset },
-            'Reset'
+            'form',
+            { onSubmit: onFormSubmit },
+            React.createElement('input', { type: 'text', name: 'option' }),
+            React.createElement(
+                'button',
+                null,
+                'Add options'
+            )
         )
     );
-    ReactDOM.render(clickTemplate, clickAddRoute);
+
+    ReactDOM.render(titleTemplate, appRoute);
 };
 
-renderCounterApp();
+renderTitleApp();
