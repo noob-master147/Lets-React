@@ -19,11 +19,13 @@ var onFormSubmit = function onFormSubmit(e) {
 };
 
 var removeAll = function removeAll() {
-    title.options.length = 0;
+    title.options = [];
     renderTitleApp();
 };
 
 var appRoute = document.getElementById('app');
+
+var number = [55, 66, 77];
 
 var renderTitleApp = function renderTitleApp() {
     var titleTemplate = React.createElement(
@@ -57,16 +59,13 @@ var renderTitleApp = function renderTitleApp() {
         React.createElement(
             'ol',
             null,
-            React.createElement(
-                'li',
-                null,
-                'Item One'
-            ),
-            React.createElement(
-                'li',
-                null,
-                'Item Two'
-            )
+            title.options.map(function (option) {
+                return React.createElement(
+                    'li',
+                    { key: option },
+                    option
+                );
+            })
         ),
         React.createElement(
             'form',

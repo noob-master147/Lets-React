@@ -18,11 +18,13 @@ const onFormSubmit = (e) => {
 }
 
 const removeAll = () => {
-    title.options.length = 0
+    title.options = []
     renderTitleApp()
 }
 
 const appRoute = document.getElementById('app')
+
+const number = [55 ,66 ,77]
 
 const renderTitleApp = () => {
     const titleTemplate = (
@@ -32,9 +34,17 @@ const renderTitleApp = () => {
             <p>{title.options.length ? 'Here are your options' : 'No options'}</p>
             <p>{title.options.length}</p>
             <button onClick={removeAll}>Remove All</button>
+            {/* {
+                number.map((number) => {
+                    return <p key={number}>Number:{number}</p>
+                })
+            }  */}
             <ol>
-                <li>Item One</li>
-                <li>Item Two</li>
+                {
+                    title.options.map((option) => {
+                        return <li key = {option}>{option}</li>
+                    })
+                }
             </ol>
             <form onSubmit={onFormSubmit}>
                 <input type = "text" name = "option"></input>
