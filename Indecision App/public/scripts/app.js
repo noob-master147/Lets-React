@@ -1,12 +1,10 @@
 'use strict';
 
-var appRoute = document.getElementById('app');
-//JSX JavaScript XML
-
 var title = {
     title: 'Indecision App',
     subTitle: 'Put your life in the hands of a computer'
 };
+
 var titleTemplate = React.createElement(
     'div',
     null,
@@ -45,14 +43,25 @@ var user = {
     userName: 'Divyansh Khandelwal',
     userAge: 19,
     userLocation: 'Vellore'
-    //Dynamic webabb
-};var userTemplate = React.createElement(
+};
+
+var getLocation = function getLocation(location) {
+    if (location) {
+        return React.createElement(
+            'p',
+            null,
+            'Location : ',
+            location
+        );
+    }
+};
+var userTemplate = React.createElement(
     'div',
     null,
     React.createElement(
         'h1',
         null,
-        user.userName
+        user.userName ? user.userName : 'Anonymous'
     ),
     React.createElement(
         'p',
@@ -60,13 +69,10 @@ var user = {
         'Age: ',
         user.userAge
     ),
-    React.createElement(
-        'p',
-        null,
-        'Location: ',
-        user.userLocation
-    )
+    getLocation(user.userLocation)
 );
 
-ReactDOM.render(titleTemplate, appRoute);
-// ReactDOM.render(userTemplate, appRoute)
+var appRoute = document.getElementById('app');
+
+// ReactDOM.render(titleTemplate, appRoute)
+ReactDOM.render(userTemplate, appRoute);
