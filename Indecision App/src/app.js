@@ -1,42 +1,52 @@
-var title = {
+const title = {
     title: 'Indecision App',
-    subTitle: 'Put your life in the hands of a computer'
+    subTitle: 'Put your life in the hands of a computer',
+    options: ['one', 'two']
 }
 
-var titleTemplate = (
+const titleTemplate = (
     <div>
         <h1>{title.title}</h1>
-        <p>{title.subTitle}</p>
+        {title.subTitle && <p>{title.subTitle}</p>}
+        <p>{title.options.length ? 'Here are your options' : 'No options'}</p>
         <ol>
             <li>Item One</li>
             <li>Item Two</li>
-            <li>Item Three</li>
         </ol>
     </div>
 );
+let count = 0
 
-
-var user = {
-    userName: 'Divyansh Khandelwal',
-    userAge: 19,
-    userLocation: 'Vellore'
+const addOne = () => {
+    count++
+    renderCounterApp()
 }
 
-const getLocation = (location) => {
-    if (location) {
-        return <p>Location : {location}</p>
-    }
+const minusOne = () => {
+    count--
+    renderCounterApp()
 }
-var userTemplate = (
-    <div>
-        <h1>{user.userName ? user.userName : 'Anonymous'}</h1>
 
-        <p>Age: {user.userAge}</p>
-        {getLocation(user.userLocation)}
-    </div>
-);
+const reset = () => {
+    count = 0
+    renderCounterApp()
+}
 
-var appRoute = document.getElementById('app')
+const appRoute = document.getElementById('app')
+const clickAddRoute = document.getElementById('clickAdd')
 
-// ReactDOM.render(titleTemplate, appRoute)
-ReactDOM.render(userTemplate, appRoute)
+ReactDOM.render(titleTemplate, appRoute)
+
+const renderCounterApp = () => {
+    const clickTemplate = (
+        <div>
+            <h1>Count: {count}</h1>
+            <button onClick={addOne}>+1</button>
+            <button onClick={minusOne}>-1</button>
+            <button onClick={reset}>Reset</button>
+        </div>
+    )
+    ReactDOM.render(clickTemplate, clickAddRoute)
+}
+
+renderCounterApp()
