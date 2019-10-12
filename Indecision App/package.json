@@ -10,6 +10,8 @@
   },
 
   "scripts": {
-    "start": "nodemon src/app.js"
+    "start": "nodemon src/app.js",
+    "babel": "babel src/app.js --out-file=public/scripts/app.js --presets=env,react --watch",
+    "git": "bash GitPush.sh"
   }
 }
